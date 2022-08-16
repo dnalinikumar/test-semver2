@@ -1,5 +1,8 @@
 name: GitHub Actions Demo
-on: [push]
+on:
+  push:
+    branches:
+      - main
 jobs:
   deploy:
     name: deploy
@@ -18,8 +21,12 @@ jobs:
         minor_pattern: "(MINOR)"
         bump_each_commit: true
         short_tags: false
-        versionFormat: "${major}.${minor}.${patch}"
-    - name: get version
-      run: echo "The version number is ${{ steps.version.outputs.version }}"
+        format: "${major}.${minor}.${patch}"
+    - name: write version info to version.txt and commit
+      run: |
+        echo "${{ steps.version.outputs.version }}" > version.txt
+        git commit version.txt -m "$$ {{ steps.version.outputs.version }}"
+        git push https://{{ secrets.GH_TOKEN }}@github.com/dnalinikumar/test-semver2.git
+
 
 
