@@ -25,8 +25,7 @@ jobs:
     - name: write version info to version.txt and commit
       run: |
         echo "${{ steps.version.outputs.version }}" > version.txt
-        git commit version.txt -m "$$ {{ steps.version.outputs.version }}"
+        git config user.email "d.nalinikumar@gmail.com"
+        git config user.name "Nalini Kumar Danda"
+        git commit version.txt -m "version update"
         git push https://{{ secrets.GH_TOKEN }}@github.com/dnalinikumar/test-semver2.git
-
-
-
