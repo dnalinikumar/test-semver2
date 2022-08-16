@@ -19,4 +19,7 @@ jobs:
         bump_each_commit: true
         short_tags: false
         versionFormat: "${major}.${minor}.${patch}"
+    - name: get version
+      run: echo "The version number is ${{ steps.version.outputs.version }}"
+
 
