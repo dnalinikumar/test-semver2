@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="test",
-    version="0.1.0",
+    version="AUTOMATED_VERSION",
     author="Nalini Kumar Danda",
     author_email="d.nalinikumar@gmail.com",
     description="Test package",
