@@ -1,0 +1,22 @@
+name: GitHub Actions Demo
+on: [push]
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Application Version
+      id: version
+      uses: paulhatch/semantic-version@v4.0.2
+      with:
+        tag_prefix: ''
+        major_pattern: "(MAJOR)"
+        minor_pattern: "(MINOR)"
+        bump_each_commit: true
+        short_tags: false
+        versionFormat: "${major}.${minor}.${patch}"
+
