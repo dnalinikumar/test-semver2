@@ -24,7 +24,7 @@ jobs:
         format: "${major}.${minor}.${patch}"
     - name: write version info to version.txt and commit
       run: |
-        sed -i "s/AUTOMATED_VERSION/${{ steps.version.outputs.version }}" setup.py
+        sed -i "s/AUTOMATED_VERSION/${{ steps.version.outputs.version }}/g" setup.py
         git config user.email "d.nalinikumar@gmail.com"
         git config user.name "Nalini Kumar Danda"
         git commit version.txt -m "version update"
