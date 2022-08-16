@@ -27,6 +27,6 @@ jobs:
         sed -i "s/AUTOMATED_VERSION/${{ steps.version.outputs.version }}/g" setup.py
         git config user.email "d.nalinikumar@gmail.com"
         git config user.name "Nalini Kumar Danda"
-        git commit version.txt -m "version update"
+        git commit setup.py -m "version update"
         git push "https://{{ secrets.GH_TOKEN }}@github.com/dnalinikumar/test-semver2.git"
     
