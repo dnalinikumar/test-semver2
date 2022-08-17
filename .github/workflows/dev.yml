@@ -4,7 +4,7 @@ on:
     branches:
       - dev
 env:
-  GH_USERNAME: "$${{ github.actor }}"
+  GH_USERNAME: "${{ github.actor }}"
 jobs:
   deploy-dev-build:
     name: deploy
