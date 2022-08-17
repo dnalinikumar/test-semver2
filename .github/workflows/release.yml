@@ -1,23 +1,38 @@
+name: GitHub Actions Demo
 on:
   push:
     tags:
       - '*.*.*'
+env:
+  GH_USERNAME: "$${{ github.actor }}"
 jobs:
-  test:
+  deploy-prerelease:
+    name: deploy
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-      - run: python my_script.py
-      - name: Set output
-        id: vars
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
-      - name: Check output
-        env:
-          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
-        run: |
-          echo $RELEASE_VERSION
-          echo "current tag: ${{ steps.vars.outputs.tag }}"
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Application Version
+      id: version
+      uses: paulhatch/semantic-version@v4.0.2
+      with:
+        tag_prefix: ''
+        major_pattern: "(MAJOR)"
+        minor_pattern: "(MINOR)"
+        bump_each_commit: false
+        short_tags: false
+        format: "${major}.${minor}.${patch}"
+    - name: write version info to version.txt and commit
+      run: |
+        sed "s/AUTOMATED_VERSION/${{ steps.version.outputs.version }}/g" setup.py.template > setup.py
+  
+    - name: switching to python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: run hello world
+      run:  |
+        python3 src/hello.py
+        
