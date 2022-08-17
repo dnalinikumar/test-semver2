@@ -21,7 +21,7 @@ jobs:
         tag_prefix: ''
         major_pattern: "(MAJOR)"
         minor_pattern: "(MINOR)"
-        bump_each_commit: false
+        bump_each_commit: true
         short_tags: false
         format: "${major}.${minor}.${patch}-${increment}"
 
