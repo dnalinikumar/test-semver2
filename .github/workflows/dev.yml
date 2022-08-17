@@ -21,7 +21,7 @@ jobs:
         tag_prefix: ''
         major_pattern: "(MAJOR)"
         minor_pattern: "(MINOR)"
-        bump_each_commit: true
+        bump_each_commit: false
         short_tags: false
         format: "${major}.${minor}.${patch}-${increment}"
     - name: write version info to version.txt and commit
@@ -33,5 +33,6 @@ jobs:
         python-version: '3.9'
     - name: run hello world
       run:  |
+        echo "Version: ${{ steps.version.outputs.version }}"
         python3 src/hello.py
         

@@ -34,6 +34,7 @@ jobs:
         python-version: '3.9'
     - name: run hello world
       run:  |
+        echo "Version: ${{ steps.version.outputs.version }}"
         python3 src/hello.py
         
         
