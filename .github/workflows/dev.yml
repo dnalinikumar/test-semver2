@@ -23,11 +23,11 @@ jobs:
         minor_pattern: "(MINOR)"
         bump_each_commit: false
         short_tags: false
-        format: "${major}.${minor}.${patch}-prerelease${increment}"
+        format: "${major}.${minor}.${patch}-${increment}"
 
     - name: write version info to version.txt and commit
       run: |
-        sed "s/AUTOMATED_VERSION/${{ steps.version.outputs.version }}/g" setup.py.template > setup.py\
+        sed "s/AUTOMATED_VERSION/${{ steps.version.outputs.version }}/g" setup.py.template > setup.py
   
     - name: switching to python 3.9
       uses: actions/setup-python@v4
